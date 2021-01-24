@@ -10,8 +10,8 @@ for ip in $( cat /tmp/tmplist2 |awk '{print $1}' )
 do
 iptablescount=`grep $ip /tmp/iptableslist | wc -l`
 failcount=`grep $ip /tmp/tmplist | wc -l`
-if [ $failcount > 5 ]; then
-	if [ $iptablescount = 0 ]; then
+if [ $failcount -gt 5 ]; then
+	if [ $iptablescount -eq 0 ]; then
 		iptables -A INPUT -s $ip -j DROP
 		iptables -A INPUT -d $ip -j DROP
 		iptables -A OUTPUT -s $ip -j DROP
